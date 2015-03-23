@@ -35,6 +35,8 @@ component extends="baseHandler"{
 	function preHandler( event, rc, prc, action, eventArguments){
 		// Tab control
 		prc.tabUsers = true;
+
+		param name="rc.authorID" default=-1;
 		
 		// Specific admin validation actions
 		if( listFindNoCase( "save,editor,savePreferences,passwordChange,saveRawPreferences", arguments.action ) ){
@@ -330,6 +332,12 @@ component extends="baseHandler"{
 			getPlugin("MessageBox").setMessage("warning","Invalid Author detected!");
 			setNextEvent( prc.xehAuthors );
 		}
+
+		if(authorService.hasRelatedObjects(oAuthor)){
+			getPlugin("MessageBox").setMessage("warning","This author has related content. You can not delete it");
+			setNextEvent( prc.xehAuthors );	
+		}
+
 		// announce event
 		announceInterception("cbadmin_preAuthorRemove",{author=oAuthor,authorID=rc.authorID});
 		// remove

@@ -32,9 +32,9 @@ limitations under the License.
 			appName 				= "ContentBox Modular CMS",
 
 			//Development Settings
-			debugMode				= false,
-			debugPassword			= "@fwPassword@",
-			reinitPassword			= "@fwPassword@",
+			debugMode				= true,
+			debugPassword			= "FD0863ADD31F8FBAC1CF3D0356F0A3CA",
+			reinitPassword			= "FD0863ADD31F8FBAC1CF3D0356F0A3CA",
 			handlersIndexAutoReload = false,
 
 			//Implicit Events
