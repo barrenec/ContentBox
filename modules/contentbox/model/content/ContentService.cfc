@@ -348,6 +348,21 @@ component extends="coldbox.system.orm.hibernate.VirtualEntityService" singleton{
 		return this;
 	}
 
+
+	/**
+	* Get content related to an author
+	* @authorId.hint identifier for the author
+	*/
+	struct function getAuthorContent(required numeric authorId){
+
+		var content = {};	
+		content.entryResults = entryService.search(author=arguments.authorID);
+		content.pageResults = pageService.search(author=arguments.authorID);
+		content.contentStoresResults = contentStoreService.search( author=arguments.authorID);
+		
+		return content;
+	}
+
 	/**
 	* Get the top visited content entries
 	* @max.hint The maximum to retrieve, defaults to 5 entries

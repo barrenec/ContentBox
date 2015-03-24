@@ -28,8 +28,7 @@ component extends="coldbox.system.orm.hibernate.VirtualEntityService" accessors=
 	property name="populator" 			inject="wirebox:populator";
 	property name="permissionService"	inject="permissionService@cb";
 	property name="roleService"			inject="roleService@cb";
-	property name="entryService"		inject="entryService@cb";
-	property name="pageService"			inject="pageService@cb";
+	property name="contentService"		inject="contentService@cb";
 
 	
 	// User hashing type
@@ -61,12 +60,12 @@ component extends="coldbox.system.orm.hibernate.VirtualEntityService" accessors=
 
 	boolean function hasRelatedObjects(author){
 
-		if(entryService.search(author=arguments.author.getAuthorId()).count){
+		var content = contentService.getAuthorContent(arguments.author.getAuthorId());
+
+		if(structCount(content) gt 0){
 			return true;
 		}
-
-		if(pageService.)
-
+		
 		return false;
 	}
 
