@@ -348,7 +348,6 @@ component extends="coldbox.system.orm.hibernate.VirtualEntityService" singleton{
 		return this;
 	}
 
-
 	/**
 	* Get content related to an author
 	* @authorId.hint identifier for the author
@@ -360,8 +359,24 @@ component extends="coldbox.system.orm.hibernate.VirtualEntityService" singleton{
 		content.pageResults = pageService.search(author=arguments.authorID);
 		content.contentStoresResults = contentStoreService.search( author=arguments.authorID);
 		
+		writedump(content);abort;
+
 		return content;
 	}
+
+
+	function deleteAuthorContent(required numeric authorId){
+
+		var content = getAuthorContent(arguments.authorId);	
+		
+		for(key in content){
+			
+			deleteContent(content[key].content[1]);
+		}
+abort;
+		
+	}
+
 
 	/**
 	* Get the top visited content entries

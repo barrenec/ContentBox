@@ -30,6 +30,7 @@ component extends="baseHandler"{
 	property name="permissionService"	inject="id:permissionService@cb";
 	property name="roleService"			inject="id:roleService@cb";
 	property name="editorService"		inject="id:editorService@cb";
+	property name="contentService"		inject="id:contentService@cb";
 	
 	// pre handler
 	function preHandler( event, rc, prc, action, eventArguments){
@@ -350,6 +351,25 @@ component extends="baseHandler"{
 	}
 
 	function clearRelatedDependencies(event, rc, prc){
+
+		param name="rc.doWhat" default="deleteAll";
+
+		if(cgi.request_action EQ "Post" OR 0 EQ 0 ){
+			switch(rc.doWhat){
+				
+				case "deleteAll":
+					contentService.deleteAuthorContent(rc.authorId);
+				break;
+			
+				case "moveToOtherAuthor":
+					
+				break;	
+
+				default:
+					
+				break;
+			}
+		}	
 
 		event.setView("authors/clearRelatedDependencies");
 	}
